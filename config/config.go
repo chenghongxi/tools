@@ -40,7 +40,7 @@ func (c *Config) SetConfigFile(configFile string) {
 }
 
 func (c *Config) SetConfigType(in string) {
-	c.configFile = in
+	c.configType = in
 }
 
 func (c *Config) readInConfig() error {
