@@ -4,6 +4,8 @@ library and tool for golang
 ## config
 - 完成 `yaml` 配置文件的加载
 - 完成 `json` 配置文件的加载
+
+### 如何使用:
 ```go
 package main
 
