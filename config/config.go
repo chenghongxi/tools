@@ -54,6 +54,7 @@ func (c *Config) readInConfig() error {
 	return nil
 }
 
+// Add yamlConfig and jsonConfig parsing
 func (c *Config) Binding(out interface{}) error {
 	if err := c.readInConfig(); err != nil {
 		return err
