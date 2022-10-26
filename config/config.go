@@ -22,6 +22,7 @@ import (
 
 const (
 	yamlConfig = "yaml"
+	jsonConfig = "json"
 )
 
 type Config struct {
@@ -59,6 +60,10 @@ func (c *Config) Binding(out interface{}) error {
 	}
 	switch c.configType {
 	case yamlConfig:
+		if err := yaml.Unmarshal(c.date, out); err != nil {
+			return err
+		}
+	case jsonConfig:
 		if err := yaml.Unmarshal(c.date, out); err != nil {
 			return err
 		}
