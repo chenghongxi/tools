@@ -1,12 +1,3 @@
-# tools
-library and tool for golang
-
-## config
-- 完成 `yaml` 配置文件的加载
-- 完成 `json` 配置文件的加载
-
-### 如何使用:
-```go
 package main
 
 import (
@@ -37,7 +28,7 @@ func main() {
 
 	// 解析 yaml文件
 	c := config.New()
-	c.SetConfigFile("yaml/config.yaml")
+	c.SetConfigFile("examples/config/yaml/config.yaml")
 	c.SetConfigType("yaml")
 
 	var yaml YamlConfig
@@ -48,7 +39,7 @@ func main() {
 
 	// 解析 json文件
 	d := config.New()
-	d.SetConfigFile("json/config.json")
+	d.SetConfigFile("examples/config/json/config.json")
 	c.SetConfigType("json")
 	var json JsonConfig
 	if err := c.Binding(&json); err != nil {
@@ -57,6 +48,3 @@ func main() {
 	fmt.Println(json.Default.Age)
 
 }
-```
-[Demo](./examples/config/main.go)
-
