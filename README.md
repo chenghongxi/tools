@@ -1,5 +1,5 @@
 # tools
-library and tool for golang
+library and tools for golang
 
 ## config
 - 完成 `yaml` 配置文件的加载
