@@ -12,8 +12,8 @@ func main() {
 	b := []byte("hello,world")
 
 	NewConfig := cipher.Config{
-		AES_KEY: "KHGSI69YBWGS0TXB",
-		AES_IV:  "3010201735544646",
+		AesKey: "KHGSI69YBWGS0TXB",
+		AesIv:  "3010201735544646",
 	}
 
 	// 加密b
