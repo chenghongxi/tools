@@ -8,15 +8,8 @@ import (
 	"crypto/cipher"
 )
 
-const (
-	AES_KEY = "KHGSI69YBWGS0TXB"
-	AES_IV  = "3010201735544646"
-)
-
-type Ciphers struct {
-	AesKey string
-	AesIv  string
-}
+var AES_KEY string
+var AES_IV string
 
 type NewCipher struct {
 }
@@ -25,29 +18,29 @@ func New() *NewCipher {
 	return &NewCipher{}
 }
 
-func (e *NewCipher) Encrypt(data []byte, ciphers *Ciphers) (string, error) {
-	block, err := aes.NewCipher([]byte(ciphers.AesKey))
+func (e *NewCipher) Encrypt(data []byte, AES_KEY string, AES_IV string) (string, error) {
+	block, err := aes.NewCipher([]byte(AES_KEY))
 	if err != nil {
 		return "", err
 	}
 	blockSize := block.BlockSize()
 	originData := pad(data, blockSize)
-	blockMode := cipher.NewCBCEncrypter(block, []byte(ciphers.AesIv))
+	blockMode := cipher.NewCBCEncrypter(block, []byte(AES_IV))
 	crypted := make([]byte, len(originData))
 	blockMode.CryptBlocks(crypted, originData)
 	return base64.StdEncoding.EncodeToString(crypted), nil
 }
 
-func (e *NewCipher) Decrypt(decryptText string, ciphers *Ciphers) ([]byte, error) {
+func (e *NewCipher) Decrypt(decryptText string, AES_KEY string, AES_IV string) ([]byte, error) {
 	decodeData, err := base64.StdEncoding.DecodeString(decryptText)
 	if err != nil {
 		return nil, err
 	}
-	block, err := aes.NewCipher([]byte(ciphers.AesKey))
+	block, err := aes.NewCipher([]byte(AES_KEY))
 	if err != nil {
 		return nil, err
 	}
-	blockMode := cipher.NewCBCDecrypter(block, []byte(ciphers.AesIv))
+	blockMode := cipher.NewCBCDecrypter(block, []byte(AES_IV))
 	originData := make([]byte, len(decodeData))
 	blockMode.CryptBlocks(originData, decodeData)
 	return unPad(originData), nil
