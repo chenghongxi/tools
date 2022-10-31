@@ -10,11 +10,11 @@ func main() {
 	exec := exec.New()
 
 	// 确认命令行是否存在
-	if _, err := exec.LookPath("ls"); err != nil {
+	if _, err := exec.LookPath("ping"); err != nil {
 		panic(err)
 	}
 	// 属性
-	out, err := exec.Command("ls", "-al").CombinedOutput()
+	out, err := exec.Command("ping", "www.baidu.com").CombinedOutput()
 	if err != nil {
 		panic(err)
 	}
