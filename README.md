@@ -106,3 +106,48 @@ LFUbTDASAOmpv0iA1org8g==
 hello,world
 ```
 [Code_Demo](./examples/cipher/main.go)
+
+## exec
+### 如何使用:
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/caoyingjunz/pixiulib/exec"
+)
+
+func main() {
+	exec := exec.New()
+
+	// 确认命令行是否存在
+	if _, err := exec.LookPath("ping"); err != nil {
+		panic(err)
+	}
+	// 属性
+	out, err := exec.Command("ping", "www.baidu.com").CombinedOutput()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(string(out))
+}
+
+```
+### output:
+```shell
+���� Ping www.a.shifen.com [39.156.66.18] ���� 32 �ֽڵ�����:
+���� 39.156.66.18 �Ļظ�: �ֽ�=32 ʱ��=27ms TTL=51
+���� 39.156.66.18 �Ļظ�: �ֽ�=32 ʱ��=24ms TTL=51
+���� 39.156.66.18 �Ļظ�: �ֽ�=32 ʱ��=24ms TTL=51
+���� 39.156.66.18 �Ļظ�: �ֽ�=32 ʱ��=29ms TTL=51
+
+39.156.66.18 �� Ping ͳ����Ϣ:
+    ���ݰ�: �ѷ��� = 4���ѽ��� = 4����ʧ = 0 (0% ��ʧ)��
+�����г̵Ĺ���ʱ��(�Ժ���Ϊ��λ):
+    ���� = 24ms��� = 29ms��ƽ�� = 26ms
+
+
+```
+
