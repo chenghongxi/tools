@@ -24,6 +24,15 @@ type JsonDefaultOption struct {
 	Age  int    `json:"age"`
 }
 
+type IniConfig struct {
+	Default IniDefaultOption `ini:"default"`
+}
+
+type IniDefaultOption struct {
+	Name string `ini:"name"`
+	Age  int    `ini:"age"`
+}
+
 func main() {
 
 	// 解析 yaml文件
@@ -47,4 +56,13 @@ func main() {
 	}
 	fmt.Println(json.Default.Age)
 
+	// 解析 ini文件
+	i := config.New()
+	i.SetConfigFile("examples/config/ini/my.ini")
+	i.SetConfigType("ini")
+	var ini IniConfig
+	if err := c.Binding(&ini); err != nil {
+		panic(err)
+	}
+	fmt.Println(ini.Default.Age)
 }
