@@ -19,12 +19,14 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"github.com/go-ini/ini"
 	"gopkg.in/yaml.v2"
 )
 
 const (
 	yamlConfig = "yaml"
 	jsonConfig = "json"
+	iniConfig  = "ini"
 )
 
 type Config struct {
@@ -68,6 +70,14 @@ func (c *Config) Binding(out interface{}) error {
 		}
 	case jsonConfig:
 		if err := yaml.Unmarshal(c.date, out); err != nil {
+			return err
+		}
+	case iniConfig:
+		cfg, err := ini.Load(c.configFile)
+		if err != nil {
+			return err
+		}
+		if err := cfg.MapTo(out); err != nil {
 			return err
 		}
 	default:
